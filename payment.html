@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Оплата WayForPay</title>
+</head>
+
+<body>
+    <h3>Зачекайте... Виконується перенаправлення на оплату</h3>
+
+    <form id="payForm" method="POST" action="https://secure.wayforpay.com/pay">
+        <input type="hidden" name="merchantAccount" value="www_instagram_com_7fe9f">
+        <input type="hidden" name="merchantDomainName" value="yourdomain.com">
+        <input type="hidden" name="orderReference" id="orderReference">
+        <input type="hidden" name="orderDate" id="orderDate">
+        <input type="hidden" name="amount" id="amount">
+        <input type="hidden" name="currency" value="UAH">
+        <input type="hidden" name="productName" value="Консультація">
+        <input type="hidden" name="productPrice" id="productPrice">
+        <input type="hidden" name="productCount" value="1">
+        <input type="hidden" name="merchantSignature" id="merchantSignature">
+    </form>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('orderReference').value = urlParams.get('order');
+        document.getElementById('orderDate').value = Math.floor(Date.now() / 1000);
+        document.getElementById('amount').value = urlParams.get('amount');
+        document.getElementById('productPrice').value = urlParams.get('amount');
+        document.getElementById('merchantSignature').value = urlParams.get('signature');
+        document.getElementById('payForm').submit();
+    </script>
+</body>
+
+</html>
